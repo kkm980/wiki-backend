@@ -22,7 +22,7 @@ app.use(
   })
 );
 
-// app.use("/api/wiki", require("./routes/userRoutes"));
+app.use("/api/wiki", require("./routes/wikiRoutes"));
 app.use("/api/auth", require("./routes/auth"));
 app.use(errorHandler);
 
