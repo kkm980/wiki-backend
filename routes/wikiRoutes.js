@@ -8,6 +8,6 @@ const {
 
 // router.use(validateToken);
 router.route("/one").post(getOneResults);
-router.route("/all").post(getAllResults);
+router.route("/all").get(getAllResults);
 
 module.exports = router;
