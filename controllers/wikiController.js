@@ -43,7 +43,43 @@ const getAllResults = asyncHandler(async (req, res) => {
 //   }
   res.json({ message: json });
 });
-
+const getOneResults = asyncHandler(async (req, res) => {
+    const { query } = req.body;
+    if (!query) {
+      res.status(400);
+      throw new Error("All fields are mandatory!");
+    }
+    const endpoint = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${query}`;
+    const response = await fetch(endpoint);
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    const json = await response.json();
+  //   return json;
+  //   const userAvailable = await User.findOne({ email });
+  //   if (userAvailable) {
+  //     res.status(400);
+  //     throw new Error("User already registered!");
+  //   }
+  
+    //Hash password
+  //   const hashedPassword = await bcrypt.hash(password, 10);
+  //   console.log("Hashed Password: ", hashedPassword);
+  //   const user = await User.create({
+  //     username,
+  //     email,
+  //     password: hashedPassword,
+  //   });
+  
+  //   console.log(`User created ${user}`);
+  //   if (user) {
+  //     res.status(201).json({ _id: user.id, email: user.email });
+  //   } else {
+  //     res.status(400);
+  //     throw new Error("User data is not valid");
+  //   }
+    res.json({ message: json });
+  });
 //@desc Login user
 //@route POST /api/users/login
 //@access public
@@ -81,4 +117,4 @@ const currentUser = asyncHandler(async (req, res) => {
   res.json(req.user);
 });
 
-module.exports = { registerUser, loginUser, currentUser };
+module.exports = { getAllResults,getOneResults, loginUser, currentUser };
